@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0b0f1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#g)"/>
+  <g fill="#ffffff" fill-opacity="0.14">
+    <circle cx="200" cy="200" r="90"/>
+    <circle cx="1400" cy="200" r="90"/>
+    <rect x="410" y="300" width="780" height="180" rx="30"/>
+  </g>
+  <text x="50%" y="55%" text-anchor="middle" font-family="Inter, sans-serif" font-size="46" fill="#ffffff" fill-opacity="0.6">
+    Electric Bike — Placeholder
+  </text>
+</svg>

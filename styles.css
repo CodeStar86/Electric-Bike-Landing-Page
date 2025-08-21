@@ -1,0 +1,178 @@
+/* Base */
+* { box-sizing: border-box; }
+html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+.rounded-card { border-radius: 16px; }
+.shadow-glass { box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06); }
+
+/* Neon gradient headline */
+.hero-gradient-text {
+  background: linear-gradient(90deg, #93c5fd, #22d3ee, #34d399, #e879f9);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 8s ease infinite;
+  filter: drop-shadow(0 0 30px rgba(56,189,248,.2));
+}
+
+/* CTA gradient button */
+.hero-cta {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa, #ec4899);
+  color: white;
+  box-shadow: 0 10px 30px rgba(167,139,250,.35);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.hero-cta:hover { transform: translateY(-1px); filter: saturate(115%); }
+.hero-cta:active { transform: translateY(1px); }
+
+/* Glass cards */
+.glass-card {
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* Share buttons */
+.share-btn {
+  height: 48px; width: 48px; display:inline-grid; place-items:center;
+  border-radius: 9999px; border:1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.06); backdrop-filter: blur(8px);
+}
+.share-btn:hover { background: rgba(255,255,255,.12); }
+
+/* Particle canvas fits container */
+#particles { width: 100%; height: 100%; display: block; }
+
+
+/* Reveal image effect */
+.reveal-img {
+  transition: filter 800ms ease, opacity 600ms ease;
+  opacity: 0.85;
+}
+.reveal-img.is-blurred {
+  filter: blur(12px) brightness(0.7);
+  opacity: 0.7;
+}
+.rmreveal {
+  height: 50vh;
+}
+
+/* Demo card vignette overlay to match screenshot */
+.demo-card { position: relative; }
+.demo-vignette {
+  background: radial-gradient(1200px 600px at 50% 30%, rgba(0,0,0,0.25), transparent 60%),
+              linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.35));
+}
+.reveal-img.is-blurred { filter: blur(16px) brightness(0.55); opacity: 0.8; }
+
+
+/* Background div with revealable blur */
+.reveal-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .85;
+  transition: filter 800ms ease, opacity 600ms ease;
+}
+.reveal-bg.is-blurred {
+  filter: blur(16px) brightness(.6);
+  opacity: .75;
+}
+
+
+/* Robust reveal background using pseudo-element; avoids <img> / CORS quirks */
+.demo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--reveal-img), url('placeholder.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(16px) brightness(.6);
+  opacity: .75;
+  transition: filter 800ms ease, opacity 600ms ease;
+}
+.demo-card.revealed::before {
+  filter: blur(0) brightness(1);
+  opacity: .95;
+}
+.demo-vignette { transition: opacity 800ms ease; }
+
+
+/* Foreground background DIV for reveal (primary path) */
+\1 background-image: var(--reveal-img), url('placeholder.svg'); background-size: cover, cover; background-position: center, center; background-repeat: no-repeat, no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(16px) brightness(.6);
+  opacity: .85;
+  transition: filter 800ms ease, opacity 600ms ease;
+}
+.demo-card.revealed .reveal-bg-div {
+  filter: blur(0) brightness(1);
+  opacity: .98;
+}
+
+
+/* Light mode overrides to complement Tailwind dark-first utilities */
+html:not(.dark) body { background-color: #ffffff; color: #111827; }
+html:not(.dark) .bg-bgd { background-color: #ffffff !important; }
+html:not(.dark) .text-white { color: #111827 !important; }
+html:not(.dark) .backdrop-blur-md { background-color: rgba(0,0,0,0.04); }
+
+
+/* === Improved Light Mode Contrast Map === */
+/* Body & base text */
+html:not(.dark) body { background-color: #f8fafc; color: #0f172a; }
+
+/* Tailwind-style text-white variants mapped to slate on light bg */
+html:not(.dark) .text-white { color: #0f172a !important; }
+html:not(.dark) .text-white\/80 { color: rgba(15, 23, 42, 0.80) !important; }
+html:not(.dark) .text-white\/70 { color: rgba(15, 23, 42, 0.70) !important; }
+html:not(.dark) .text-white\/60 { color: rgba(15, 23, 42, 0.60) !important; }
+
+/* Soft translucent surfaces switch to subtle dark-on-light tints */
+html:not(.dark) .bg-white\/10 { background-color: rgba(17, 24, 39, 0.06) !important; }
+html:not(.dark) .bg-white\/5  { background-color: rgba(17, 24, 39, 0.03) !important; }
+html:not(.dark) .border-white\/20 { border-color: rgba(17, 24, 39, 0.12) !important; }
+
+/* Cards & glass */
+html:not(.dark) .glass-card { 
+  background: rgba(255,255,255,0.92) !important; 
+  box-shadow: 0 10px 30px rgba(15,23,42,0.10), inset 0 1px 0 rgba(255,255,255,0.6) !important;
+}
+
+/* Hero badge/labels using blur panels */
+html:not(.dark) .backdrop-blur-md { background-color: rgba(17,24,39,0.06) !important; }
+
+/* Buttons: keep neon gradient text legible on light */
+html:not(.dark) .hero-cta { 
+  color: #0b0f19 !important; 
+  text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+}
+
+/* Sections with bg-bgd intent */
+html:not(.dark) .bg-bgd { background-color: #ffffff !important; }
+
+/* Footer links */
+html:not(.dark) a { color: #0ea5e9; }
+html:not(.dark) a:hover { color: #0284c7; }
+
+/* Optional: grid overlay lower opacity in light */
+html:not(.dark) .bg-grid { opacity: .05 !important; }
+
+/* Ensure SVG icons (moon/sun) visible */
+html:not(.dark) #moon { opacity: 0.7; }
+
+
+/* Force buttons and links to black text on light mode */
+html:not(.dark) button,
+html:not(.dark) .hero-cta,
+html:not(.dark) a {
+  color: #000000 !important;
+}

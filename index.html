@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head><script>
+// Apply theme before paint
+(function() {
+  try {
+    var stored = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var wantDark = stored ? (stored === 'dark') : prefersDark;
+    if (wantDark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+  } catch (e) {
+    // Fallback to dark default
+    document.documentElement.classList.add('dark');
+  }
+})();
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Electric Revolution — The Big Reveal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#22d3ee',
+            accent: '#8b5cf6',
+            neonPink: '#ec4899',
+            neonLime: '#a3e635',
+            bgd: '#0b0e13'
+          },
+          backgroundImage: {
+            'hero-gradient': 'radial-gradient(1200px 600px at 50% -10%, rgba(17,24,39,0.6), transparent), radial-gradient(800px 400px at 20% 60%, rgba(59,130,246,0.12), transparent), radial-gradient(800px 400px at 80% 40%, rgba(236,72,153,0.12), transparent)',
+            'grid': 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)'
+          },
+          keyframes: {
+            float: {
+              '0%': { transform: 'translateY(0) translateX(0)' },
+              '50%': { transform: 'translateY(-20px) translateX(10px)' },
+              '100%': { transform: 'translateY(0) translateX(0)' }
+            },
+            gradientShift: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            glowPulse: {
+              '0%,100%': { opacity: .45 },
+              '50%': { opacity: .85 }
+            }
+          },
+          animation: {
+            float: 'float 8s ease-in-out infinite',
+            gradientShift: 'gradientShift 8s ease infinite',
+            glowPulse: 'glowPulse 3s ease-in-out infinite'
+          },
+          boxShadow: {
+            glass: '0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06)',
+          },
+          borderRadius: {
+            card: '16px'
+          }
+        }
+      }
+    }
+  </script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="./styles.css" rel="stylesheet">
+</link></head>
+<body class="bg-bgd text-white min-h-screen selection:bg-primary/30">
+<!-- Theme toggle -->
+<button class="fixed right-4 top-4 z-50 h-10 w-10 rounded-full border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center" id="themeToggle">
+<svg class="h-5 w-5" fill="none" id="moon" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+</button>
+<!-- HERO -->
+<header class="relative overflow-hidden">
+<!-- background layers -->
+<div class="absolute inset-0 -z-10">
+<div class="absolute inset-0 bg-hero-gradient"></div>
+<div class="absolute inset-0 bg-grid bg-[length:40px_40px] opacity-10"></div>
+<div class="absolute inset-0 pointer-events-none">
+<canvas class="absolute inset-0" id="particles"></canvas>
+</div>
+</div>
+<div class="max-w-6xl mx-auto px-4 pt-28 pb-16 text-center">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-sm">
+<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="opacity-90">Next-Gen Technology</span>
+</div>
+<h1 class="mt-8 font-extrabold leading-[0.95] text-5xl md:text-7xl">
+<span class="block hero-gradient-text drop-shadow-[0_0_40px_rgba(56,189,248,0.25)]">ELECTRIC</span>
+<span class="block hero-gradient-text">REVOLUTION</span>
+</h1>
+<p class="mt-6 text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+        Experience the future of urban mobility with <span class="text-cyan-400">AI-powered performance</span>,
+        <span class="text-emerald-400">sustainable innovation</span>, and <span class="text-pink-400">unmatched style</span>
+<span class="block mx-auto w-40 h-[2px] rounded-full bg-gradient-to-r from-cyan-400/0 via-cyan-400 to-cyan-400/0 mt-3"></span>
+</p>
+<div class="mt-8 flex items-center justify-center gap-4">
+<a class="px-6 py-3 rounded-full font-semibold shadow-lg hero-cta" href="#cta">
+          🚀 Join the Revolution
+        </a>
+<a class="px-6 py-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 backdrop-blur-md flex items-center gap-2" href="#demo">
+          ⚡ Watch Demo
+        </a>
+</div>
+<!-- Feature cards -->
+<div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+<div class="glass-card">
+<div class="text-2xl">🧠</div>
+<div class="mt-2 font-semibold text-cyan-300">AI-Powered</div>
+<div class="text-white/70 text-sm">Smart route optimization</div>
+</div>
+<div class="glass-card">
+<div class="text-2xl">⚡</div>
+<div class="mt-2 font-semibold text-yellow-300">60km Range</div>
+<div class="text-white/70 text-sm">Single charge power</div>
+</div>
+<div class="glass-card">
+<div class="text-2xl">🌱</div>
+<div class="mt-2 font-semibold text-emerald-300">Eco-Friendly</div>
+<div class="text-white/70 text-sm">Zero emissions</div>
+</div>
+</div>
+<!-- Scroll indicator -->
+<div class="mt-10 flex justify-center">
+<div class="h-10 w-6 rounded-full border border-white/40 relative">
+<div class="absolute left-1/2 -translate-x-1/2 top-2 h-2 w-1.5 rounded-full bg-white/70 animate-bounce"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- COUNTDOWN -->
+<section class="py-20 text-center bg-gradient-to-b from-transparent to-black/40">
+<div class="max-w-4xl mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-semibold">The Big Reveal Day is Coming</h2>
+<p class="text-white/70 mt-2">Our revolutionary electric bike will be unveiled to the world.</p>
+<div class="mt-6 inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/20 bg-white/5">
+<span class="h-2 w-2 rounded-full bg-white/70"></span>
+<span class="opacity-90">Big Reveal Day</span>
+</div>
+<div class="mt-8 flex justify-center gap-6" id="countdown"></div>
+<div class="mt-10 space-y-3 text-left md:text-center">
+<p class="text-sm text-white/70"><span class="mr-2">⚡</span>Early birds get exclusive perks and lifetime warranty</p>
+<p class="text-sm font-medium text-white"><span class="mr-2">🎁</span>Special surprises await on reveal day</p>
+</div>
+</div>
+</section>
+<!-- DEMO REVEAL -->
+<section class="py-16" id="demo">
+<div class="max-w-5xl mx-auto px-4">
+<h3 class="text-center text-3xl font-semibold">The Big Reveal Coming Soon</h3>
+<p class="text-center text-white/70 mt-2">Something extraordinary will be revealed in 2 days</p>
+<div class="mt-8 rounded-[22px] md:rounded-[28px] overflow-hidden shadow-2xl bg-white/[0.04] backdrop-blur-xl border border-white/12 p-12 md:p-16 relative demo-card" style="--reveal-img:url('electricbike.jpg');">
+<div class="absolute inset-0 demo-vignette pointer-events-none z-10 z-10"></div>
+<div class="text-center relative z-20 rmreveal">
+<div class="text-7xl md:text-8xl mb-4 text-white/90">?</div>
+<h4 class="text-2xl font-semibold">The Future Awaits</h4>
+<p class="text-white/70 mt-2">Revolutionary design meets cutting-edge technology</p>
+<button class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 bg-black/40 hover:bg-black/50 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]" id="revealBtn">
+            Reveal Now
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- PROBLEM / PROMISE -->
+<section class="py-20">
+<div class="max-w-6xl mx-auto px-4 text-center">
+<h3 class="text-3xl md:text-4xl font-semibold">Tired of Commutes That Drain Your Energy?</h3>
+<p class="text-white/70 mt-3 max-w-3xl mx-auto">We're building a solution that makes urban transportation effortless, enjoyable, and environmentally conscious. No more traffic jams, parking hassles, or compromising on style.</p>
+<div class="mt-10 grid md:grid-cols-2 gap-8 text-left">
+<div class="rounded-card border border-red-900/30 bg-red-900/10 p-8 shadow-glass">
+<h4 class="text-white font-semibold mb-2">The Problem</h4>
+<ul class="list-disc list-inside text-white/80 space-y-2">
+<li>Expensive fuel and maintenance costs</li>
+<li>Limited parking and traffic congestion</li>
+<li>Environmental impact of traditional vehicles</li>
+<li>Lack of intelligent transportation solutions</li>
+</ul>
+</div>
+<div class="rounded-card border border-white/15 bg-white/[0.06] p-8 shadow-glass">
+<h4 class="text-white font-semibold mb-2">Our Promise</h4>
+<ul class="list-disc list-inside text-white/80 space-y-2">
+<li>Zero emissions with maximum performance</li>
+<li>AI-optimized routes and battery management</li>
+<li>Sleek design that turns heads</li>
+<li>Affordable luxury for everyone</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- COMMUNITY / TESTIMONIALS -->
+<section class="py-20">
+<div class="max-w-6xl mx-auto px-4 text-center">
+<h3 class="text-3xl md:text-4xl font-semibold">Join the Movement</h3>
+<p class="text-white/70 mt-2">Be part of the future of transportation</p>
+<div class="mt-10 grid md:grid-cols-3 gap-6">
+<div class="rounded-card border border-white/15 bg-white/[0.06] p-6 text-left shadow-glass">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-white/10 grid place-items-center">AC</div>
+<div>
+<div class="font-semibold">Alex Chen</div>
+<div class="text-xs text-white/60">Beta Tester</div>
+</div>
+</div>
+<p class="text-white/70 italic mt-4">"This is the future of urban mobility. The AI features are mind-blowing!"</p>
+</div>
+<div class="rounded-card border border-white/15 bg-white/[0.06] p-6 text-left shadow-glass">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-white/10 grid place-items-center">SJ</div>
+<div>
+<div class="font-semibold">Sarah Johnson</div>
+<div class="text-xs text-white/60">Early Adopter</div>
+</div>
+</div>
+<p class="text-white/70 italic mt-4">"Finally, an electric bike that doesn't compromise on style or performance."</p>
+</div>
+<div class="rounded-card border border-white/15 bg-white/[0.06] p-6 text-left shadow-glass">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-white/10 grid place-items-center">MR</div>
+<div>
+<div class="font-semibold">Mike Rodriguez</div>
+<div class="text-xs text-white/60">Tech Enthusiast</div>
+</div>
+</div>
+<p class="text-white/70 italic mt-4">"The smart routing saved me 30 minutes on my daily commute."</p>
+</div>
+</div>
+<div class="mt-12">
+<h4 class="text-2xl font-semibold">Get Early Access</h4>
+<p class="text-white/70 mt-2">Join our waitlist and be the first to experience the future</p>
+<form class="mt-6 max-w-xl mx-auto flex gap-3" id="waitlistForm">
+<input class="flex-1 rounded-lg bg-white/5 border border-white/15 px-4 py-3 placeholder:text-white/50" id="emailInput" placeholder="Enter your email" required="" type="email"/>
+<button class="rounded-lg bg-white text-black px-5 py-3 font-semibold">Join Waitlist</button>
+</form>
+<p class="hidden mt-3 text-sm text-white/80" id="successMsg">🎁 Invite friends and move up the waitlist</p>
+</div>
+</div>
+</section>
+<!-- ROADMAP -->
+<section class="py-20">
+<div class="max-w-6xl mx-auto px-8">
+<h3 class="text-3xl md:text-4xl font-semibold text-center">Launch Roadmap</h3>
+<p class="text-center text-white/70 mt-2">Your journey to the future starts here</p>
+<div class="relative mt-12">
+<div class="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-white/15"></div>
+<div class="grid md:grid-cols-2 gap-y-28">
+<div class="flex justify-start">
+<div class="w-[420px] rounded-card border border-white/15 bg-white/[0.06] p-6 shadow-glass">
+<div class="text-xs text-white/60 mb-1">Sign-up <span class="float-right">Now</span></div>
+<div class="font-semibold text-lg">Join the Movement</div>
+<div class="text-white/70 text-sm mt-1">Get on the waitlist for exclusive updates</div>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="w-[420px] rounded-card border border-white/15 bg-white/[0.06] p-6 shadow-glass">
+<div class="text-xs text-white/60 mb-1">Sneak Peek <span class="float-right">Week 2</span></div>
+<div class="font-semibold text-lg">Behind the Scenes</div>
+<div class="text-white/70 text-sm mt-1">Exclusive content and development insights</div>
+</div>
+</div>
+<div class="flex justify-start">
+<div class="w-[420px] rounded-card border border-white/15 bg-white/[0.06] p-6 shadow-glass">
+<div class="text-xs text-white/60 mb-1">Early Access <span class="float-right">Week 3</span></div>
+<div class="font-semibold text-lg">Beta Testing</div>
+<div class="text-white/70 text-sm mt-1">Limited release to our community</div>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="w-[420px] rounded-card border border-white/15 bg-white/[0.06] p-6 shadow-glass">
+<div class="text-xs text-white/60 mb-1">Official Launch <span class="float-right">Week 4</span></div>
+<div class="font-semibold text-lg">Full Release</div>
+<div class="text-white/70 text-sm mt-1">Available to everyone worldwide</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL CTA -->
+<section class="py-20 border-t border-white/10" id="cta">
+<div class="max-w-4xl mx-auto px-4 text-center">
+<h3 class="text-3xl md:text-4xl font-semibold">Don't Miss Out</h3>
+<p class="text-white/70 mt-2">Spots are filling fast. Secure your place in the future.</p>
+<p class="text-white mt-2">🔥 Only 500 early access spots remaining</p>
+<form class="mt-6 max-w-2xl mx-auto flex gap-3">
+<input class="flex-1 rounded-lg bg-white/5 border border-white/15 px-4 py-3 placeholder:text-white/50" placeholder="Enter your email for instant access" required="" type="email"/>
+<button class="rounded-lg bg-white text-black px-6 py-3 font-semibold">Reserve Spot</button>
+</form>
+<div class="mt-10 max-w-2xl mx-auto">
+<hr class="border-white/10"/>
+<div class="mt-6">
+<div class="text-white/80">↗ Spread the word</div>
+<div class="mt-4 flex items-center justify-center gap-4">
+<a class="share-btn" data-share="twitter">𝕏</a>
+<a class="share-btn" data-share="linkedin">in</a>
+<a class="share-btn" data-share="instagram">◎</a>
+</div>
+<p class="text-sm text-white/70 mt-4">Share with friends to unlock exclusive launch bonuses</p>
+</div>
+</div>
+</div>
+</section>
+<footer class="py-12 text-center text-white/70 text-sm">
+    © <span id="year"></span> Electric Bike Revolution. All rights reserved.<br/>
+<span class="opacity-70">Building the future of sustainable transportation, one ride at a time.</span>
+</footer>
+<script src="./script.js"></script>
+</body>
+</html>
